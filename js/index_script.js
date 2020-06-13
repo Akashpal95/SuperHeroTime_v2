@@ -30,6 +30,7 @@ function fetchSuperHeroesByName(name){
         })
         .catch(function(){
             console.log('Error in fetching');
+            $('.all-img-container').append($('<div class="no-result">No results to display</div>'))
             return;
         });
 }

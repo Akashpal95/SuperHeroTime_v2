@@ -1,4 +1,5 @@
 {   
+    Common.dynamicEventSetter();
     
     //To create new promises for each url
     function getSuperHerosById(url){
@@ -28,7 +29,7 @@
             // console.log(allSuperHeroes);
             Common.showSuperHeroes(allSuperHeroes);
         })
-        dynamicEventSetter();
+        Common.dynamicEventSetter();
         return;
     }
 
