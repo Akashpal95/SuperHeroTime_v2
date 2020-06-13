@@ -3,6 +3,39 @@ const Common = (function(){
     let timerId = undefined;
     let favListID = []
 
+    function dynamicEventSetter(){ 
+        //Set events for all favourite buttons
+        var favButtons = document.getElementsByClassName('favrt-icon');
+        for(let each of favButtons){
+            each.addEventListener('click', function(){
+                 console.log(each.style.color);
+                 if (each.style.color === 'red'){
+                     each.style.color = 'white';
+                     Common.removeFromFavourite(each.parentElement);
+                 }
+                 else{
+                 each.style.color = 'red';
+                 Common.storeSuperHeroesToFavourite(each.parentElement);
+                 }
+            });
+        }
+     }
+
+    //To display all the fetched images
+    function showSuperHeroes(superHeroList){
+        $('.all-img-container').empty();
+        for(each of superHeroList){
+            let newCard=newCardDom(each);
+            // console.log(newCard[0].id);
+            if(Common.favListID.includes(newCard[0].id)){
+                newCard[0].children[0].style.color = 'red';
+            }
+            $('.all-img-container').append(newCard);
+        }
+        dynamicEventSetter();
+        return;
+    }
+
     //To store superHeroes added to favourites
     function storeSuperHeroesToFavourite(cardDom){
         favListID.push(cardDom.id);
@@ -72,15 +105,17 @@ const Common = (function(){
         <p class="real-name">${superHero.biography['full-name']}</p>
             </div>`)
     }
-
+ 
     return {
         favListID,
         getCookie,
         setCookie,
         throttleFunction,
         debounceFunction,
+        dynamicEventSetter,
         storeSuperHeroesToFavourite,
         removeFromFavourite,
+        showSuperHeroes,
         newCardDom
     }
 

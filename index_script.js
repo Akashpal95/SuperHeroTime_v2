@@ -4,69 +4,7 @@ var onloadFlag = true;
 var searchInput = document.getElementById('search');
 
 
-dynamicEventSetter();
-
-function dynamicEventSetter(){ 
-   //Set events for all favourite buttons
-   var favButtons = document.getElementsByClassName('favrt-icon');
-   for(let each of favButtons){
-       each.addEventListener('click', function(){
-            console.log(each.style.color);
-            if (each.style.color === 'red'){
-                each.style.color = 'white';
-                Common.removeFromFavourite(each.parentElement);
-            }
-            else{
-            each.style.color = 'red';
-            Common.storeSuperHeroesToFavourite(each.parentElement);
-            }
-       });
-   }
-}
-//To display all the fetched images
-function showSuperHeroes(superHeroList){
-    $('.all-img-container').empty();
-    for(each of superHeroList){
-        let newCard=Common.newCardDom(each);
-        if(Common.favListID.includes(newCard[0].id)){
-            newCard[0].children[0].style.color = 'red';
-        }
-        $('.all-img-container').append(newCard);
-    }
-    dynamicEventSetter();
-    return;
-}
-//To create new promises for each url
-function getSuperHerosById(url){
-    return new Promise((resolve, reject) =>{
-        fetch(url)
-        .then((response => response.json()))
-        .then((data) => {
-            resolve(data);
-        })
-    })
-}
-//Showing favourite superheroes by generating promises in a loop and 
-//then rendering the result after  all those promises get over
-function showFavouriteSuperHeros(){
-    $('.all-img-container').empty();
-    let allUrlRequests=[];
-    let superHeroUrls = [];
-    for(eachID of Common.favListID){
-        superHeroUrls.push(`https://superheroapi.com/api.php/1571199179705402/${eachID}`)
-    }
-    superHeroUrls.forEach(
-        (userUrl) => {
-            allUrlRequests.push(getSuperHerosById(userUrl));
-        }
-    )
-    Promise.all(allUrlRequests).then((allSuperHeroes) =>{
-        console.log(allSuperHeroes);
-        showSuperHeroes(allSuperHeroes);
-    })
-    dynamicEventSetter();
-    return;
-}
+Common.dynamicEventSetter();
 
 //HTTP call to fetch superheroes by name from API
 function fetchSuperHeroesByName(name){
@@ -74,7 +12,7 @@ function fetchSuperHeroesByName(name){
     if(allSuperHeroList.length > 0 && name === "a"){
         // console.log('Inside');
         console.log(allSuperHeroList)
-        showSuperHeroes(allSuperHeroList);
+        Common.showSuperHeroes(allSuperHeroList);
         return;
     }
     // console.log("Fetching...");
@@ -87,21 +25,8 @@ function fetchSuperHeroesByName(name){
             allSuperHeroList = data.results;
             onloadFlag = false;
             }
-            showSuperHeroes( data.results);
+            Common.showSuperHeroes( data.results);
             return;
-        })
-        .catch(function(){
-            console.log('Error in fetching');
-            return;
-        });
-}
-function fetchSuperHeroesByID(id){
-    fetch(`https://superheroapi.com/api.php/1571199179705402/${id}`)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            showSuperHeroDetails( data);
         })
         .catch(function(){
             console.log('Error in fetching');
