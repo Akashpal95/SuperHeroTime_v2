@@ -17,7 +17,8 @@
         $('.all-img-container').empty();
         let allUrlRequests=[];
         let superHeroUrls = [];
-        for(eachID of Common.favListID){
+        let favListID = Common.getCookie();
+        for(eachID of favListID){
             superHeroUrls.push(`https://superheroapi.com/api.php/1571199179705402/${eachID}`)
         }
         superHeroUrls.forEach(
