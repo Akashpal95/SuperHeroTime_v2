@@ -47,6 +47,17 @@
         return;
     }
 
+    //Template for image card dom
+    let newCardDom=function(superHero)
+    {
+        return $(`<div class="img-card" id="${superHero.id}">
+        <i class="fas fa-heart favrt-icon"></i>
+        <a href="details.html?id=${superHero.id}"><img class="superhero-img" src="${superHero.image['url']}" onerror="this.onerror=null;this.src='error.jpg';"></a>
+        <p class="superhero-name">${superHero.name}</p>
+        <p class="real-name">${superHero.biography['full-name']}</p>
+            </div>`)
+    }
+
     showFavouriteSuperHeros();
 
 }
