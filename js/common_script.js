@@ -1,7 +1,7 @@
 const Common = (function(){
 
     let timerId = undefined;
-    let favListID = []
+    let favListID = getCookie()
 
     function dynamicEventSetter(){ 
         //Set events for all favourite buttons
@@ -11,11 +11,11 @@ const Common = (function(){
                  console.log(each.style.color);
                  if (each.style.color === 'red'){
                      each.style.color = 'white';
-                     Common.removeFromFavourite(each.parentElement);
+                     removeFromFavourite(each.parentElement);
                  }
                  else{
                  each.style.color = 'red';
-                 Common.storeSuperHeroesToFavourite(each.parentElement);
+                 storeSuperHeroesToFavourite(each.parentElement);
                  }
             });
         }
@@ -27,7 +27,7 @@ const Common = (function(){
         for(each of superHeroList){
             let newCard=newCardDom(each);
             // console.log(newCard[0].id);
-            if(Common.favListID.includes(newCard[0].id)){
+            if(favListID.includes(newCard[0].id)){
                 newCard[0].children[0].style.color = 'red';
             }
             $('.all-img-container').append(newCard);
