@@ -43,7 +43,6 @@
             // console.log(allSuperHeroes);
             showSuperHeroes(allSuperHeroes);
         })
-        Common.dynamicEventSetter();
         return;
     }
 
