@@ -5,7 +5,7 @@ It is a simple web application to settle all your superhero related arguments ma
 It has all the information about all the superheros you love which I have fetched from this "https://superheroapi.com/" API.
 You can go to the website, login with facebook and start having fun with your newly acquired access-token or you can visit my
 website which is hosted here at our beloved github.
-# https://akashpal95.github.io/SuperHeroTime/
+# https://akashpal95.github.io/SuperHeroTime_v2/
 # Few things to know
 <ul>
 <li>Put all the files in the same folder.
