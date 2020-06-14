@@ -2,6 +2,7 @@ const Common = (function(){
 
     let timerId = undefined;
     let favListID = getCookie()
+    console.log(favListID);
 
     function dynamicEventSetter(){ 
         //Set events for all favourite buttons
