@@ -1,6 +1,20 @@
 {   
     Common.dynamicEventSetter();
-    
+    let favListID = Common.getCookie();
+    //To display all the fetched images
+    function showSuperHeroes(superHeroList){
+        $('.all-img-container').empty();
+        for(each of superHeroList){
+            let newCard=newCardDom(each);
+            // console.log(newCard[0].id);
+            if(favListID.includes(newCard[0].id)){
+                newCard[0].children[0].style.color = 'red';
+            }
+            $('.all-img-container').append(newCard);
+        }
+        dynamicEventSetter();
+        return;
+    }
     //To create new promises for each url
     function getSuperHerosById(url){
         return new Promise((resolve, reject) =>{
@@ -17,7 +31,6 @@
         $('.all-img-container').empty();
         let allUrlRequests=[];
         let superHeroUrls = [];
-        let favListID = Common.getCookie();
         for(eachID of favListID){
             superHeroUrls.push(`https://superheroapi.com/api.php/1571199179705402/${eachID}`)
         }
@@ -28,7 +41,7 @@
         )
         Promise.all(allUrlRequests).then((allSuperHeroes) =>{
             // console.log(allSuperHeroes);
-            Common.showSuperHeroes(allSuperHeroes);
+            showSuperHeroes(allSuperHeroes);
         })
         Common.dynamicEventSetter();
         return;
