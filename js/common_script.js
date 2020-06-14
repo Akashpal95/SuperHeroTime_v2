@@ -5,6 +5,7 @@ const Common = (function(){
     console.log(favListID);
 
     function dynamicEventSetter(){ 
+        console.log('This is bewing set');
         //Set events for all favourite buttons
         var favButtons = document.getElementsByClassName('favrt-icon');
         for(let each of favButtons){
@@ -33,7 +34,7 @@ const Common = (function(){
             }
             $('.all-img-container').append(newCard);
         }
-        dynamicEventSetter();
+        Common.dynamicEventSetter();
         return;
     }
 

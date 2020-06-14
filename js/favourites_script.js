@@ -12,7 +12,7 @@
             }
             $('.all-img-container').append(newCard);
         }
-        dynamicEventSetter();
+        Common.dynamicEventSetter();
         return;
     }
     //To create new promises for each url
